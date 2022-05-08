@@ -5,3 +5,18 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:welcome1@127.0.0.1:27017/BOOKSTORE?authSource=admin
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: 9508faaec7c87635f03e
+            clientSecret: ebaa0cf40f246bef88d181e6145bba0e5515402c
+
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    oauth:
+      clientId: 9508faaec7c87635f03e
+      clientSecret: ebaa0cf40f246bef88d181e6145bba0e5515402c
+    oauth2-redirect-url: github

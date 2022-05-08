@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import za.co.absa.api.bookstore.model.serializer.CustomJsonDateTimeDeserializer;
 import za.co.absa.api.bookstore.model.serializer.CustomJsonDateTimeSerializer;
 
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -39,12 +40,19 @@ public class Order {
     @JsonSerialize(using = CustomJsonDateTimeSerializer.class)
     @JsonDeserialize(using = CustomJsonDateTimeDeserializer.class)
     private LocalDateTime oderTimeStamp;
+    @NotNull
+    @NotEmpty
+    @Size(min = 10, max = 13)
     @JsonProperty("isbn")
     private String isbn;
     @JsonProperty("title")
     private String title;
     @JsonProperty("author")
     private String author;
+    @NotNull
+    @NotEmpty
+    @Min(1)
+    @Max(Integer.MAX_VALUE)
     @JsonProperty("orderQuantity")
     private int orderQuantity;
 }

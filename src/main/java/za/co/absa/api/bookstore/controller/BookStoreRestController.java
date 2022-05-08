@@ -14,6 +14,7 @@ import za.co.absa.api.bookstore.model.Order;
 import za.co.absa.api.bookstore.model.OrderDTO;
 import za.co.absa.api.bookstore.service.OrderService;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class BookStoreRestController {
         this.orderService = orderService;
     }
 
+    @Valid
     @PostMapping("/order")
     @RouterOperation(
             path = "/bookstore/order",
@@ -44,7 +46,7 @@ public class BookStoreRestController {
                             @ApiResponse(responseCode = "404", description = "Service not found")},
                     requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                             content = @Content(schema = @Schema(implementation = OrderDTO.class)))))
-    public Mono<Order> createOrder(@RequestBody OrderDTO orderDTO) {
+    public Mono<Order> createOrder(@RequestBody @Valid OrderDTO orderDTO) {
         Order order = new Order();
         order.setIsbn(orderDTO.getIsbn());
         order.setTitle(orderDTO.getTitle());
