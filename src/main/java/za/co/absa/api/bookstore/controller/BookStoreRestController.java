@@ -4,10 +4,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springdoc.core.annotations.RouterOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.support.ModelAndViewContainer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import za.co.absa.api.bookstore.model.Order;
@@ -18,8 +20,11 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Valid
+@CrossOrigin
 @RestController
-@RequestMapping("/bookstore")
+@SecurityRequirement(name = "security_auth")
+//@RequestMapping("/bookstore")
 public class BookStoreRestController {
     private final OrderService orderService;
 
@@ -28,10 +33,17 @@ public class BookStoreRestController {
         this.orderService = orderService;
     }
 
+    @GetMapping("/")
+    public ModelAndViewContainer redirectToSwagger() {
+        return new ModelAndViewContainer().addAttribute("redirect", "/webjars/swagger-ui/index.html");
+    }
+
     @Valid
+    @CrossOrigin
+    @SecurityRequirement(name = "code")
     @PostMapping("/order")
     @RouterOperation(
-            path = "/bookstore/order",
+            path = "/order",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE},
             method = RequestMethod.POST,
@@ -57,9 +69,11 @@ public class BookStoreRestController {
         return orderService.createOrder(order);
     }
 
+    @CrossOrigin
+    @SecurityRequirement(name = "code")
     @GetMapping("/orders")
     @RouterOperation(
-            path = "/bookstore/orders",
+            path = "/orders",
             produces = {MediaType.APPLICATION_JSON_VALUE},
             method = RequestMethod.GET,
             beanClass = BookStoreRestController.class,

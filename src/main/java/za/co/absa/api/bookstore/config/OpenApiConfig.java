@@ -13,13 +13,10 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
                                 description = "Simple interface to place and retrieve online book orders",
                                 version = "0.0.1",
                                 contact = @Contact(name = "Anthony Nathan", email = "anthonynathan64@gmail.com")))
-@SecurityScheme(name = "security_auth", type = SecuritySchemeType.OAUTH2,
+@SecurityScheme(name = "code", type = SecuritySchemeType.OAUTH2,
                 flows = @OAuthFlows(
                         authorizationCode = @OAuthFlow(
                                 authorizationUrl = "${springdoc.oAuthFlow.authorizationUrl}",
-                                tokenUrl = "${springdoc.oAuthFlow.tokenUrl}",
-                                scopes = {
-                                        @OAuthScope(name = "read", description = "read scope"),
-                                        @OAuthScope(name = "write", description = "write scope")})))
+                                tokenUrl = "${springdoc.oAuthFlow.tokenUrl}")))
 public class OpenApiConfig {
 }
