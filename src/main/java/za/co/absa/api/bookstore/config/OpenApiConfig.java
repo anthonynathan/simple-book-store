@@ -6,8 +6,8 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.OAuthFlow;
 import io.swagger.v3.oas.annotations.security.OAuthFlows;
-import io.swagger.v3.oas.annotations.security.OAuthScope;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(info = @Info(title = "Simple Book Store",
                                 description = "Simple interface to place and retrieve online book orders",
@@ -18,5 +18,6 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
                         authorizationCode = @OAuthFlow(
                                 authorizationUrl = "${springdoc.oAuthFlow.authorizationUrl}",
                                 tokenUrl = "${springdoc.oAuthFlow.tokenUrl}")))
+@Configuration
 public class OpenApiConfig {
 }
