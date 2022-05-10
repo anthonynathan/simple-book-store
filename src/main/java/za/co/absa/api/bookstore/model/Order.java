@@ -1,5 +1,6 @@
 package za.co.absa.api.bookstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -23,8 +24,8 @@ import java.time.LocalDateTime;
 @ToString
 @EqualsAndHashCode
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(value = "id")
 @JsonPropertyOrder({
-        "_id",
         "oderTimeStamp",
         "isbn",
         "title",
@@ -34,7 +35,6 @@ import java.time.LocalDateTime;
 @Document("order")
 public class Order {
     @Id
-    @JsonProperty("_id")
     private ObjectId id;
     @JsonProperty("oderTimeStamp")
     @JsonSerialize(using = CustomJsonDateTimeSerializer.class)
@@ -42,7 +42,7 @@ public class Order {
     private LocalDateTime oderTimeStamp;
     @NotNull
     @NotEmpty
-    @Size(min = 10, max = 13)
+    @Size(min = 10, max = 14)
     @JsonProperty("isbn")
     private String isbn;
     @JsonProperty("title")
@@ -50,7 +50,6 @@ public class Order {
     @JsonProperty("author")
     private String author;
     @NotNull
-    @NotEmpty
     @Min(1)
     @Max(Integer.MAX_VALUE)
     @JsonProperty("orderQuantity")
