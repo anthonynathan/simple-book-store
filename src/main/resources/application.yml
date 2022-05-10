@@ -19,9 +19,6 @@ springdoc:
     oauth:
       clientId: 9508faaec7c87635f03e
       clientSecret: ebaa0cf40f246bef88d181e6145bba0e5515402c
-    oauth2-redirect-url: http://localhost:8095/webjars/swagger-ui/oauth2-redirect.html
-    csrf:
-      enabled: true
   oAuthFlow:
     authorizationUrl: https://github.com/login/oauth/authorize
-    tokenUrl: http://localhost:8095/login/oauth2/code/github
+    tokenUrl: https://github.com/login/oauth/access_token
