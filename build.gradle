@@ -2,6 +2,7 @@ plugins {
     id "org.springframework.boot" version "2.5.13"
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
     id "java"
+    id "maven-publish"
 }
 
 group = "za.co.absa.api"
@@ -28,6 +29,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
     implementation "org.springframework.boot:spring-boot-starter-webflux"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springdoc:springdoc-openapi-webflux-core:${springDocVersion}"
     implementation "org.springdoc:springdoc-openapi-webflux-ui:${springDocVersion}"
     implementation "org.springdoc:springdoc-openapi-security:${springDocVersion}"
@@ -44,4 +46,23 @@ jar {
 
 tasks.named("test") {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact("build/libs/simple-book-store-$version" + ".jar") {
+                extension 'jar'
+            }
+        }
+    }
+    repositories {
+        maven {
+            url 'https://anthony-807499492587.d.codeartifact.eu-west-1.amazonaws.com/maven/dev-repo/'
+            credentials {
+                username "aws"
+                password "eyJ2ZXIiOjEsImlzdSI6MTY1MjIyMTgyNCwiZW5jIjoiQTEyOEdDTSIsInRhZyI6IkJzblFpMHpGay1DVWJCZHVlVDItWHciLCJleHAiOjE2NTIyNjUwMjQsImFsZyI6IkExMjhHQ01LVyIsIml2IjoiZVlRV0JQMEl2bG9QUE1QdiJ9.Lv_l0lQdr6TcN8l2VRvOKA.KrSPkrMORMlDkKls.oGdaNUu0FBxHXMp7MxEIwIV2EtkJZimUkfl60QkwBmm3tVHgWn3ofykhP513ppjW8QRL-Sz8mSatAtBojmV7RtgLUAcLdCdtnLGBnrhTV0sniOdTiWdiTz02TJYZtaZFWLzYNw61UpUXHwLV47Vnafdr6hNc9tDS4ywFDqKxrVP4H1v-Dbj_INkWxf19lSs_unoVfOzUwXwnZuxhRyj3P4agD1IpwWDd2q_n_hhuo51aLKmY6BKCfIURKca63exrJklPq8QSlu73gIIJxZxRKVqflvELxMwCZ3Ih0gmg42FV9I5KpZszC5FASPxV2sEJQzAiEggot40QUrINufwWs58XT7z54gFIlq8awzNjcFN9WhRV3QeXziqb3qxEfirAmu1CA5iZTrCm5XILf_2EIsF94Ukeu1tLAmpQv8pTVywUBIew7UkvD7c3JaG7DgMgrMdi1s2MObgy6Gz3FTLHLfBj5GcsjTvG0RLfF0YAohNXhWI29-pZfJ99TMBAkbjv9IKeXLpaiIWuT51bdG7MsqlrnKiHbPned947b-Zkn0Wj7PWGPoi06gy1o4VMvx0S_onx2fTVJo_qaS1__-qoMUrNNWrRBc0DTQUY-vgnUIIzOMeJejdLJKfLFjGJpw2CDuLSsmRuEmoCn6Eevlou8PWIe0QHCYKvzzX2KAnlj00f1XB2st366kJkudLGBOPU3326rJSMAxyjiGUilDw9TiPs31BEj1-0InFSePJlh_ZMH8229w14c-1-YN5blET_MCAwP-TBIz87AWhLoFZ4lhI1b_xatruLwN3yMnswjG-J4FYonFujxrUyncv68dqYPyTE9BQIMY7x4q9ee_EKie6b-XCH0BDd11Holru9AKV_Lc6CIhjMV4daXqVR07AP2g2Ewk8HjEYQALA0YXKjwA.Qt5rUbXrHyKBnqv091j0eg"
+            }
+        }
+    }
 }

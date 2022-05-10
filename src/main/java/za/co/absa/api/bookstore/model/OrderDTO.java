@@ -24,7 +24,7 @@ import javax.validation.constraints.*;
 public class OrderDTO {
     @NotNull
     @NotEmpty
-    @Size(min = 10, max = 13)
+    @Size(min = 10, max = 14)
     @JsonProperty("isbn")
     private String isbn;
     @JsonProperty("title")
@@ -32,7 +32,6 @@ public class OrderDTO {
     @JsonProperty("author")
     private String author;
     @NotNull
-    @NotEmpty
     @Min(1)
     @Max(Integer.MAX_VALUE)
     @JsonProperty("orderQuantity")
